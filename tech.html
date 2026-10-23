@@ -74,7 +74,7 @@
   html,body{transition:background-color .4s var(--ease), color .4s var(--ease);}
 
   *{margin:0;padding:0;box-sizing:border-box;min-width:0;}
-  html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden;}
+  html{scroll-behavior:smooth;max-width:100%;}
   body{
     background:var(--black);
     color:var(--white);
@@ -1275,7 +1275,7 @@
   /* ===== TECH CATALOG (tech.html) ===== */
   .listing-thumb.prod{
     object-fit:contain;
-    background:var(--anthracite-2);
+    background:#fff;
     padding:22px;
   }
   .listing-thumb.prod img{object-fit:contain;}
@@ -1287,6 +1287,42 @@
   .card-grid.feat4{grid-template-columns:repeat(4,1fr);}
   @media (max-width:960px){ .card-grid.feat4{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:600px){ .card-grid.feat4{grid-template-columns:1fr;} }
+
+  /* ===== QUICK NAV (sticky in-page section jump) ===== */
+  .quick-nav{
+    position:sticky;
+    top:77px;
+    z-index:500;
+    background:var(--glass-bg);
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .quick-nav-row{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:16px 0;
+    scrollbar-width:none;
+  }
+  .quick-nav-row::-webkit-scrollbar{display:none;}
+  .quick-nav-row a{
+    flex-shrink:0;
+    padding:9px 20px;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border:1px solid var(--line-strong);
+    color:var(--grey);
+    border-radius:999px;
+    transition:all .3s;
+    white-space:nowrap;
+  }
+  .quick-nav-row a:hover,.quick-nav-row a.active{
+    border-color:var(--red-bright);
+    color:var(--white);
+    background:rgba(226,38,58,0.1);
+  }
 </style>
 </head>
 <body>
@@ -1352,6 +1388,20 @@
   </div>
   <div class="hero-scroll"><span>Défiler</span><span class="dot"></span></div>
 </section>
+
+<nav class="quick-nav">
+  <div class="wrap">
+    <div class="quick-nav-row">
+      <a href="#iphones" data-qn="iphones">iPhones</a>
+      <a href="#accessoires" data-qn="accessoires">Accessoires</a>
+      <a href="#gaming" data-qn="gaming">Gaming</a>
+      <a href="#ordinateurs" data-qn="ordinateurs">Informatique</a>
+      <a href="#reparation" data-qn="reparation">Réparation</a>
+      <a href="#avis" data-qn="avis">Avis</a>
+      <a href="#contact" data-qn="contact">Contact</a>
+    </div>
+  </div>
+</nav>
 
 <section class="group-section">
   <div class="wrap">
@@ -2651,6 +2701,24 @@
       });
     });
   });
+
+  // Quick-nav active section highlight
+  var qnLinks = document.querySelectorAll('.quick-nav-row a');
+  var qnSections = Array.prototype.map.call(qnLinks, function(a){
+    return document.getElementById(a.getAttribute('data-qn'));
+  });
+  function onQnScroll(){
+    var pos = window.scrollY + 140;
+    var current = null;
+    qnSections.forEach(function(sec, i){
+      if(sec && sec.offsetTop <= pos){ current = i; }
+    });
+    qnLinks.forEach(function(a, i){
+      a.classList.toggle('active', i === current);
+    });
+  }
+  window.addEventListener('scroll', onQnScroll, {passive:true});
+  onQnScroll();
 
   // Project filter
   var filterBtns = document.querySelectorAll('.filter-btn');
