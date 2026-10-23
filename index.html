@@ -760,6 +760,190 @@
   @media (max-width:960px){ .property-grid{grid-template-columns:1fr 1fr;} }
   @media (max-width:640px){ .property-grid{grid-template-columns:1fr;} }
 
+  /* ===== REAL LISTINGS (annonces) ===== */
+  .listings-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    margin-top:60px;
+  }
+  .listing-card{
+    border:1px solid var(--line);
+    background:var(--anthracite-2);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:transform .4s var(--ease), border-color .4s;
+  }
+  .listing-card:hover{transform:translateY(-6px);border-color:var(--line-strong);}
+  .listing-thumb{
+    position:relative;
+    overflow:hidden;
+    cursor:zoom-in;
+    aspect-ratio:3/4;
+    background:var(--black-2);
+  }
+  .listing-thumb img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:top center;
+    display:block;
+    transition:transform .6s var(--ease);
+  }
+  .listing-card:hover .listing-thumb img{transform:scale(1.06);}
+  .listing-zoom-hint{
+    position:absolute;right:12px;bottom:12px;
+    width:34px;height:34px;
+    border-radius:50%;
+    background:rgba(10,10,11,0.72);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity .3s, transform .3s;
+  }
+  .listing-card:hover .listing-zoom-hint{opacity:1;transform:translateY(0);}
+  .listing-zoom-hint svg{width:15px;height:15px;stroke:#fff;}
+  .listing-badge{
+    position:absolute;top:12px;left:12px;
+    background:var(--red);
+    color:#fff;
+    font-family:'Space Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:6px 11px;
+  }
+  .listing-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1;}
+  .listing-loc{
+    font-family:'Space Mono',monospace;
+    font-size:10.5px;
+    color:var(--red-bright);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .listing-body h4{font-size:16.5px;line-height:1.3;}
+  .listing-meta{
+    font-size:12.5px;
+    color:var(--grey);
+    margin-top:8px;
+    font-weight:300;
+  }
+  .listing-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    gap:10px;
+  }
+  .listing-price{
+    font-family:'Archivo',sans-serif;
+    font-weight:800;
+    font-size:14.5px;
+    line-height:1.25;
+  }
+  .listing-wa{
+    width:34px;height:34px;
+    flex-shrink:0;
+    border-radius:50%;
+    border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color .3s, background .3s;
+  }
+  .listing-wa:hover{border-color:var(--red-bright);background:rgba(226,38,58,0.1);}
+  .listing-wa svg{width:15px;height:15px;stroke:var(--red-bright);}
+  @media (max-width:1100px){ .listings-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .listings-grid{grid-template-columns:1fr;} }
+
+  /* lightbox */
+  .lightbox{
+    position:fixed;inset:0;
+    z-index:2000;
+    background:rgba(5,5,6,0.92);
+    backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
+    padding:40px 20px;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox img{
+    max-width:min(90vw,520px);
+    max-height:88vh;
+    width:auto;height:auto;
+    border:1px solid var(--line-strong);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
+  }
+  .lightbox-close{
+    position:absolute;top:24px;right:28px;
+    width:44px;height:44px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.3);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-close svg{width:18px;height:18px;stroke:#fff;}
+
+  /* video reels */
+  .reels-head{
+    margin-top:76px;
+    margin-bottom:28px;
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+  }
+  .reels-head h3{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:20px;
+  }
+  .reels-head span{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    color:var(--grey);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .reels-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+  }
+  .reel-card{
+    position:relative;
+    aspect-ratio:9/16;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:#000;
+    cursor:pointer;
+  }
+  .reel-card video{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .reel-mute{
+    position:absolute;right:10px;bottom:10px;
+    width:32px;height:32px;
+    border-radius:50%;
+    background:rgba(10,10,11,0.72);
+    border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .reel-mute svg{width:14px;height:14px;stroke:#fff;}
+  .reel-label{
+    position:absolute;left:12px;bottom:12px;right:48px;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    text-shadow:0 2px 10px rgba(0,0,0,0.6);
+  }
+  @media (max-width:1100px){ .reels-row{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .reels-row{grid-template-columns:1fr;} }
+
   /* ===== PROJECTS ===== */
   .projects-section{background:var(--black);}
   .filter-row{
@@ -1101,7 +1285,7 @@
     <nav class="main-nav">
       <a href="#top">Accueil</a>
       <a href="#groupe">Le Groupe</a>
-      <a href="#tech">Chacal Tech</a>
+      <a href="tech.html">Chacal Tech</a>
       <a href="#immo">Chacal Immo</a>
       <a href="#projets">Nos projets</a>
       <a href="#actualites">Actualités</a>
@@ -1123,7 +1307,7 @@
 <nav class="mobile-nav" id="mobileNav">
   <a href="#top">Accueil</a>
   <a href="#groupe">Le Groupe</a>
-  <a href="#tech">Chacal Tech</a>
+  <a href="tech.html">Chacal Tech</a>
   <a href="#immo">Chacal Immo</a>
   <a href="#projets">Nos projets</a>
   <a href="#actualites">Actualités</a>
@@ -1187,7 +1371,7 @@
         <div class="pillar-index mono">01 — TECHNOLOGIE</div>
         <h3>Chacal Tech</h3>
         <p>Solutions digitales, informatique et services numériques pour particuliers, entreprises et organisations.</p>
-        <a href="#tech" class="btn-arrow">Explorer Chacal Tech <span>→</span></a>
+        <a href="tech.html" class="btn-arrow">Explorer Chacal Tech <span>→</span></a>
       </div>
       <div class="pillar-card">
         <div class="pillar-index mono">02 — IMMOBILIER</div>
@@ -1242,7 +1426,7 @@
     </div>
 
     <div class="section-cta reveal">
-      <a href="#contact" class="btn btn-primary">Découvrir Chacal Tech →</a>
+      <a href="tech.html" class="btn btn-primary">Découvrir Chacal Tech →</a>
     </div>
   </div>
 </section>
@@ -1264,45 +1448,158 @@
       </div>
     </div>
 
-    <div class="property-grid reveal">
-      <div class="property-card">
-        <div class="property-image" style="background-image:linear-gradient(180deg, rgba(10,10,11,0) 40%, rgba(10,10,11,0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80');">
-          <span class="property-badge">Villa</span>
+    <div class="listings-grid reveal" id="listingsGrid">
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/01-almadie-artp.jpg">
+          <span class="listing-badge">Terrain</span>
+          <img src="assets/immo/01-almadie-artp.jpg" alt="Terrain commercial Almadies, en face ARTP" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
         </div>
-        <div class="property-body">
-          <div class="property-loc">Abidjan, Côte d'Ivoire</div>
-          <h4>Villa contemporaine Riviera</h4>
-          <div class="property-meta">
-            <span class="property-price">450 000 €</span>
-            <a href="#contact" class="btn-arrow">Voir le projet <span>→</span></a>
+        <div class="listing-body">
+          <div class="listing-loc">Almadies · en face ARTP</div>
+          <h4>Terrain commercial d'angle</h4>
+          <div class="listing-meta">500 m² · titre foncier individuel · usage commercial</div>
+          <div class="listing-footer">
+            <span class="listing-price">1 700 000 F<br><span style="font-weight:400;font-size:11px;color:var(--grey);">le m²</span></span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20terrain%20commercial%20Almadies%20en%20face%20ARTP." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
           </div>
         </div>
       </div>
-      <div class="property-card">
-        <div class="property-image" style="background-image:linear-gradient(180deg, rgba(10,10,11,0) 40%, rgba(10,10,11,0.5)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80');">
-          <span class="property-badge">Bureaux</span>
+
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/02-ngor-almadies.jpg">
+          <span class="listing-badge">Terrain</span>
+          <img src="assets/immo/02-ngor-almadies.jpg" alt="Terrain à vendre Ngor Almadies" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
         </div>
-        <div class="property-body">
-          <div class="property-loc">Dakar, Sénégal</div>
-          <h4>Immeuble de bureaux premium</h4>
-          <div class="property-meta">
-            <span class="property-price">Sur devis</span>
-            <a href="#contact" class="btn-arrow">Voir le projet <span>→</span></a>
+        <div class="listing-body">
+          <div class="listing-loc">Ngor Almadies</div>
+          <h4>Terrain à vendre</h4>
+          <div class="listing-meta">1 000 m² · titre foncier individuel · à 400 m du rond-point Brioche Dorée</div>
+          <div class="listing-footer">
+            <span class="listing-price">1 000 000 F<br><span style="font-weight:400;font-size:11px;color:var(--grey);">le m²</span></span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20terrain%20de%20Ngor%20Almadies." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
           </div>
         </div>
       </div>
-      <div class="property-card">
-        <div class="property-image" style="background-image:linear-gradient(180deg, rgba(10,10,11,0) 40%, rgba(10,10,11,0.5)), url('https://images.unsplash.com/photo-1512914890251-72b26bcf503f?auto=format&fit=crop&w=900&q=80');">
-          <span class="property-badge">Appartement</span>
+
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/03-keur-gorgui.jpg">
+          <span class="listing-badge">Terrain</span>
+          <img src="assets/immo/03-keur-gorgui.jpg" alt="Terrain à vendre Cité Keur Gorgui" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
         </div>
-        <div class="property-body">
-          <div class="property-loc">Yamoussoukro, Côte d'Ivoire</div>
-          <h4>Résidence standing avec vue</h4>
-          <div class="property-meta">
-            <span class="property-price">210 000 €</span>
-            <a href="#contact" class="btn-arrow">Voir le projet <span>→</span></a>
+        <div class="listing-body">
+          <div class="listing-loc">Cité Keur Gorgui</div>
+          <h4>Terrain à vendre</h4>
+          <div class="listing-meta">1 HA (10 000 m²) · bail devant notaire</div>
+          <div class="listing-footer">
+            <span class="listing-price">1 500 000 F<br><span style="font-weight:400;font-size:11px;color:var(--grey);">le m² · à débattre</span></span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20terrain%20de%20Keur%20Gorgui." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
           </div>
         </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/04-keur-massar.jpg">
+          <span class="listing-badge">Terrain jumelé</span>
+          <img src="assets/immo/04-keur-massar.jpg" alt="Terrain jumelé à vendre Keur Massar" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-loc">Keur Massar · Tolou Ablaye Wade</div>
+          <h4>Terrain jumelé à vendre</h4>
+          <div class="listing-meta">2 × 250 m² · titre foncier individuel · vente devant notaire</div>
+          <div class="listing-footer">
+            <span class="listing-price">500 000 F<br><span style="font-weight:400;font-size:11px;color:var(--grey);">le m² · à débattre</span></span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20terrain%20jumel%C3%A9%20de%20Keur%20Massar." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/05-villa-liberte6.jpg">
+          <span class="listing-badge">Villa</span>
+          <img src="assets/immo/05-villa-liberte6.jpg" alt="Villa R+1 à vendre Liberté 6 Extension" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-loc">Liberté 6 Extension</div>
+          <h4>Villa R+1 à vendre</h4>
+          <div class="listing-meta">300 m² · titre foncier individuel · à 100 m de la Brioche Dorée</div>
+          <div class="listing-footer">
+            <span class="listing-price">250 000 000 F</span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20villa%20R%2B1%20de%20Libert%C3%A9%206%20Extension." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/06-villa-almadies-edk.jpg">
+          <span class="listing-badge">Villa</span>
+          <img src="assets/immo/06-villa-almadies-edk.jpg" alt="Villa à vendre Almadies derrière EDK" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-loc">Almadies · derrière EDK</div>
+          <h4>Villa à vendre</h4>
+          <div class="listing-meta">Usage commercial · sur le goudron · titre foncier individuel</div>
+          <div class="listing-footer">
+            <span class="listing-price">1 500 000 F<br><span style="font-weight:400;font-size:11px;color:var(--grey);">le m²</span></span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20villa%20des%20Almadies%20derri%C3%A8re%20EDK." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/07-fann-residences.jpg">
+          <span class="listing-badge">Villa à démolir</span>
+          <img src="assets/immo/07-fann-residences.jpg" alt="Villa à démolir Fann Résidences" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-loc">Fann Résidences</div>
+          <h4>Villa à démolir — idéal projet</h4>
+          <div class="listing-meta">1 600 m² · angle, triple façade · titre foncier individuel</div>
+          <div class="listing-footer">
+            <span class="listing-price">1,7 M F<br><span style="font-weight:400;font-size:11px;color:var(--grey);">le m²</span></span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20villa%20%C3%A0%20d%C3%A9molir%20de%20Fann%20R%C3%A9sidences." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-card">
+        <div class="listing-thumb" data-full="assets/immo/08-route-almadies-casino.jpg">
+          <span class="listing-badge">Terrain</span>
+          <img src="assets/immo/08-route-almadies-casino.jpg" alt="Terrain à vendre Route des Almadies, en face Casino" loading="lazy">
+          <span class="listing-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M9 11h4M11 9v4"/></svg></span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-loc">Route des Almadies · en face Casino</div>
+          <h4>Terrain à vendre</h4>
+          <div class="listing-meta">1 425 m² · titre foncier individuel · 1ère position sur la route</div>
+          <div class="listing-footer">
+            <span class="listing-price">1 300 000 F<br><span style="font-weight:400;font-size:11px;color:var(--grey);">le m² · à débattre</span></span>
+            <a class="listing-wa" href="https://wa.me/221000000000?text=Bonjour%20Chacal%20Immo%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20terrain%20Route%20des%20Almadies%20en%20face%20Casino." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reels-head reveal">
+      <h3>Visites en vidéo</h3>
+      <span>Dernières annonces filmées</span>
+    </div>
+    <div class="reels-row reveal">
+      <div class="reel-card" data-video>
+        <video src="assets/videos/reel-almadie-artp.mp4" muted loop playsinline autoplay></video>
+        <span class="reel-label">Terrain Almadies · ARTP</span>
+        <span class="reel-mute"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></span>
+      </div>
+      <div class="reel-card" data-video>
+        <video src="assets/videos/reel-pont-e-villa.mp4" muted loop playsinline autoplay></video>
+        <span class="reel-label">Villa Pont E</span>
+        <span class="reel-mute"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></span>
       </div>
     </div>
 
@@ -1311,6 +1608,11 @@
     </div>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <img id="lightboxImg" src="" alt="Annonce Chacal Immo">
+</div>
 
 <!-- ===================== PROJETS ===================== -->
 <section class="projects-section" id="projets">
@@ -1569,9 +1871,9 @@
       <div class="footer-col">
         <h5>Chacal Tech</h5>
         <ul>
-          <li><a href="#tech">Solutions</a></li>
-          <li><a href="#tech">Services</a></li>
-          <li><a href="#tech">Entreprises</a></li>
+          <li><a href="tech.html">Solutions</a></li>
+          <li><a href="tech.html">Services</a></li>
+          <li><a href="tech.html">Entreprises</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1666,6 +1968,33 @@
     }, {threshold:0.5});
     counters.forEach(function(el){ cio.observe(el); });
   }
+
+  // Listings lightbox
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxClose = document.getElementById('lightboxClose');
+  document.querySelectorAll('.listing-thumb').forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      var full = thumb.getAttribute('data-full');
+      lightboxImg.src = full;
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox(){ lightbox.classList.remove('open'); lightboxImg.src=''; }
+  if(lightboxClose){ lightboxClose.addEventListener('click', closeLightbox); }
+  if(lightbox){
+    lightbox.addEventListener('click', function(e){ if(e.target === lightbox){ closeLightbox(); } });
+  }
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeLightbox(); } });
+
+  // Video reels — tap to toggle sound
+  document.querySelectorAll('.reel-card').forEach(function(card){
+    var video = card.querySelector('video');
+    card.addEventListener('click', function(){
+      video.muted = !video.muted;
+      card.classList.toggle('unmuted', !video.muted);
+    });
+  });
 
   // Project filter
   var filterBtns = document.querySelectorAll('.filter-btn');
